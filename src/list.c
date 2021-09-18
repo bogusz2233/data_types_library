@@ -28,6 +28,12 @@ list_t *list_create(void)
     return list;
 }
 
+list_size_t list_count_elements(list_t *list)
+{
+    if(list == NULL)    return -1;
+    else                return list->count_elements;
+}
+
 void list_add_new_element_uint8(list_t *list, uint8_t value)
 {
     list_node_t *node               = malloc(sizeof(list_node_t));

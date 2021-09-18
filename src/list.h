@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-typedef uint32_t list_size_t;
+typedef int32_t list_size_t;
 
 typedef enum
 {
@@ -15,6 +15,7 @@ typedef enum
 typedef struct List list_t;
 
 list_t              *list_create(void);
+list_size_t         list_count_elements(list_t *list);
 eList_data_type_t   list_get_element_type(list_t *list, uint32_t index);
 list_t              *list_clear(void);
 void                list_destroy(list_t *list);
