@@ -15,7 +15,6 @@ MAIN_INC 		= $(foreach d, $(SRC_DIR), -I$d)
 MAIN_OBJ		= $(patsubst $(SRC_DIR)/%,$(BUILD_DIR)/%,$(subst ../,,$(patsubst %.c,%.o,$(subst $(MAIN_FILES)/,,$(MAIN_SRC)))))
 
 all: $(MAIN_OBJ)
-	@echo $(MAIN_INC)
 	@$(CC) -shared -o datatypes.so $(MAIN_OBJ)
 #	@$(AR) $(ARFLAGS) libdatatypes.a $(MAIN_OBJ)
 
@@ -28,4 +27,4 @@ init:
 
 example_list: all
 	$(CC) $(CFLAGS) $(LDFLAGS) $(MAIN_INC) ./datatypes.so $(EXAMPLE_DIR)/list_uint8.c -o $(EXAMPLE_DIR)/list_example
-	./$(EXAMPLE_DIR)/list_example
+	@./$(EXAMPLE_DIR)/list_example
