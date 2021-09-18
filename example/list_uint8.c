@@ -28,8 +28,8 @@ int main(int arg_count, char *arg_values[])
 static void print_list_info(list_t *list)
 {
     printf("List ptr:           %ld\n", (long int)list);
-    printf("List elemets:       %d\n", list->countElements);
-    printf("Element in list:    %d\n", list->countElements);
+    printf("List elemets:       %d\n", list->count_elements);
+    printf("Element in list:    %d\n", list->count_elements);
     printf("HEAD ptr:           %ld\n", (long int)list->head);
     printf("TAIL ptr:           %ld\n", (long int)list->tail);
 }

@@ -8,10 +8,10 @@ typedef enum
     eList_data_type_uint8
 }eList_data_type_t;
 
-typedef struct node
+typedef struct Node
 {
-    void                *dataPtr;
-    eList_data_type_t   dataType;
+    void                *data_ptr;
+    eList_data_type_t   data_type;
     uint32_t            index;
     struct node         *next;
     struct node         *previous; 
@@ -19,7 +19,7 @@ typedef struct node
 
 typedef struct List
 {
-    uint32_t    countElements;
+    uint32_t    count_elements;
     list_node_t *head;
     list_node_t *tail;
 }list_t;
