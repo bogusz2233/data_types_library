@@ -4,7 +4,7 @@
 typedef struct Node
 {
     void                *data_ptr;
-    eList_data_type_t   data_type;
+    list_data_type_t    data_type;
     uint32_t            index;
     struct Node         *next;
     struct Node         *previous; 
@@ -13,8 +13,8 @@ typedef struct Node
 typedef struct List
 {
     list_size_t count_elements;
-    node_t *head;
-    node_t *tail;
+    node_t      *head;
+    node_t      *tail;
 };
 
 static uint8_t  is_list_empty(list_t *);
@@ -25,6 +25,7 @@ list_t *list_create(void)
     list_t *list            = malloc(sizeof(list_t));
     list->count_elements    = 0;
     list->head              = NULL;
+    list->tail              = NULL;
 
     return list;
 }
@@ -35,12 +36,12 @@ list_size_t list_count_elements(list_t *list)
     else                return list->count_elements;
 }
 
-eList_data_type_t   list_get_element_type(list_t *list, list_size_t index)
+list_data_type_t list_get_element_type(list_t *list, list_size_t index)
 {
     node_t *node_ref;
 
-    if(list == NULL )                   return eList_data_type_none;
-    if(index >= list->count_elements)   return eList_data_type_none;
+    if(list == NULL )                   return list_data_type_none;
+    if(index >= list->count_elements)   return list_data_type_none;
 
     node_ref = get_node_at(list, index);
     
@@ -49,9 +50,9 @@ eList_data_type_t   list_get_element_type(list_t *list, list_size_t index)
 
 void list_add_new_element_uint8(list_t *list, uint8_t value)
 {
-    node_t *node               = malloc(sizeof(node_t));
+    node_t *node                    = malloc(sizeof(node_t));
     node->data_ptr                  = malloc(sizeof(uint8_t));
-    node->data_type                 = eList_data_type_uint8;
+    node->data_type                 = list_data_type_uint8;
     node->next                      = node;
     *((uint8_t *)node->data_ptr)    = value;
 
@@ -80,7 +81,7 @@ uint8_t list_get_element_uint8(list_t *list, list_size_t index)
    
     node_ref = get_node_at(list, index);
 
-    if(node_ref->data_type == eList_data_type_uint8) return *((uint8_t *)node_ref->data_ptr);
+    if(node_ref->data_type == list_data_type_uint8) return *((uint8_t *)node_ref->data_ptr);
 
     return 0;
 }

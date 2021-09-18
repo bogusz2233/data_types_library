@@ -45,13 +45,13 @@ static void print_list_elements(list_t *list)
     uint8_t result;
 
     printf("Elements types uint8_t in list:\n");
+
     for (list_size_t i = 0; i < count_elements; i++)
     {
-        if(list_get_element_type(list, i) == eList_data_type_uint8)
+        if(list_get_element_type(list, i) == list_data_type_uint8)
         {
             result = list_get_element_uint8(list, i);
             printf("[ %2d ] = %3d\n", i, result);
         }
     }
-    
 }
