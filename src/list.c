@@ -57,12 +57,12 @@ void list_add_new_element_uint8(list_t *list, uint8_t value)
     node_t *node               = malloc(sizeof(node_t));
     node->data_ptr                  = malloc(sizeof(uint8_t));
     node->data_type                 = eList_data_type_uint8;
-    node->next                      = NULL;
+    node->next                      = node;
     *((uint8_t *)node->data_ptr)    = value;
 
     if (is_list_empty(list))
     {
-        node->previous              = NULL;
+        node->previous              = node;
         list->head = list->tail     = node;
     }
     else
