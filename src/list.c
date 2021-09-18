@@ -1,9 +1,6 @@
 #include <stdlib.h>
 #include "list.h"
 
-static uint8_t  is_list_empty(list_t *);
-static node_t   *get_node_at(list_t *, list_size_t);
-
 typedef struct Node
 {
     void                *data_ptr;
@@ -19,6 +16,9 @@ typedef struct List
     node_t *head;
     node_t *tail;
 };
+
+static uint8_t  is_list_empty(list_t *);
+static node_t   *get_node_at(list_t *, list_size_t);
 
 list_t *list_create(void)
 {
@@ -70,6 +70,21 @@ void list_add_new_element_uint8(list_t *list, uint8_t value)
 
     list->count_elements++;
 }
+
+uint8_t list_get_element_uint8(list_t *list, list_size_t index)
+{
+    node_t * node_ref;
+
+    if(list == NULL )                               return 0;
+    if(index >= list->count_elements)               return 0;
+   
+    node_ref = get_node_at(list, index);
+
+    if(node_ref->data_type == eList_data_type_uint8) return *((uint8_t *)node_ref->data_ptr);
+
+    return 0;
+}
+
 
 static uint8_t is_list_empty(list_t *list)
 {
