@@ -2,6 +2,7 @@
 #include "list.h"
 
 static void print_list_info(list_t *list);
+static void print_list_elements(list_t *list);
 
 int main(int arg_count, char *arg_values[])
 {
@@ -27,13 +28,30 @@ int main(int arg_count, char *arg_values[])
     list_add_new_element_uint8(list, 20);
     printf("\nElement dodany\n");
     print_list_info(list);
+
+    print_list_elements(list);
 }
 
 static void print_list_info(list_t *list)
 {
     printf("List ptr:           %ld\n", (long int)list);
     printf("List elemets:       %d\n", list_count_elements(list));
-    //printf("Element in list:    %d\n", list->count_elements);
-    //printf("HEAD ptr:           %ld\n", (long int)list->head);
-    //printf("TAIL ptr:           %ld\n", (long int)list->tail);
+}
+
+static void print_list_elements(list_t *list)
+{
+    list_size_t i;
+    list_size_t count_elements = list_count_elements(list);
+    uint8_t result;
+
+    printf("Elements types uint8_t in list:\n");
+    for (list_size_t i = 0; i < count_elements; i++)
+    {
+        if(list_get_element_type(list, i) == eList_data_type_uint8)
+        {
+            result = list_get_element_uint8(list, i);
+            printf("[ %2d ] = %3d\n", i, result);
+        }
+    }
+    
 }
