@@ -23,7 +23,7 @@ typedef struct List
 }list_t;
 
 
-list_t *list_create_uint8();
+list_t *list_create_uint8(void);
 void    list_add_new_element_uint8(list_t *list, uint8_t value);
 uint8_t list_get_element_uint8(list_t *list, uint32_t index);
 void    list_destroy(list_t *list);
