@@ -3,6 +3,22 @@
 
 static uint8_t is_list_empty(list_t *);
 
+typedef struct Node
+{
+    void                *data_ptr;
+    eList_data_type_t   data_type;
+    uint32_t            index;
+    struct Node         *next;
+    struct Node         *previous; 
+}list_node_t;
+
+typedef struct List
+{
+    list_size_t count_elements;
+    list_node_t *head;
+    list_node_t *tail;
+};
+
 list_t *list_create(void)
 {
     list_t *list            = malloc(sizeof(list_t));
