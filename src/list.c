@@ -10,13 +10,13 @@ typedef struct Node
     uint32_t            index;
     struct Node         *next;
     struct Node         *previous; 
-}list_node_t;
+}node_t;
 
 typedef struct List
 {
     list_size_t count_elements;
-    list_node_t *head;
-    list_node_t *tail;
+    node_t *head;
+    node_t *tail;
 };
 
 list_t *list_create(void)
@@ -34,9 +34,27 @@ list_size_t list_count_elements(list_t *list)
     else                return list->count_elements;
 }
 
+eList_data_type_t   list_get_element_type(list_t *list, list_size_t index)
+{
+    node_t *node_ref;
+    list_size_t i =0;
+
+    if(list == NULL )                   return eList_data_type_none;
+    if(index >= list->count_elements)   return eList_data_type_none;
+
+    node_ref = list->head;
+
+    for (i = 0; i < index; i++)
+    {
+        node_ref = node_ref->next;
+    }
+    
+    return node_ref->data_type;
+}
+
 void list_add_new_element_uint8(list_t *list, uint8_t value)
 {
-    list_node_t *node               = malloc(sizeof(list_node_t));
+    node_t *node               = malloc(sizeof(node_t));
     node->data_ptr                  = malloc(sizeof(uint8_t));
     node->data_type                 = eList_data_type_uint8;
     node->next                      = NULL;
@@ -49,7 +67,7 @@ void list_add_new_element_uint8(list_t *list, uint8_t value)
     }
     else
     {
-        list_node_t *lastElement = list->tail;
+        node_t *lastElement = list->tail;
 
         node->previous      = lastElement;
         lastElement->next   = list->tail = node;
