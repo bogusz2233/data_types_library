@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include "list.h"
 
-static uint8_t is_list_empty(list_t *);
+static uint8_t  is_list_empty(list_t *);
+static node_t   *get_node_at(list_t *, list_size_t);
 
 typedef struct Node
 {
@@ -37,17 +38,11 @@ list_size_t list_count_elements(list_t *list)
 eList_data_type_t   list_get_element_type(list_t *list, list_size_t index)
 {
     node_t *node_ref;
-    list_size_t i =0;
 
     if(list == NULL )                   return eList_data_type_none;
     if(index >= list->count_elements)   return eList_data_type_none;
 
-    node_ref = list->head;
-
-    for (i = 0; i < index; i++)
-    {
-        node_ref = node_ref->next;
-    }
+    node_ref = get_node_at(list, index);
     
     return node_ref->data_type;
 }
@@ -80,4 +75,19 @@ static uint8_t is_list_empty(list_t *list)
 {
     if(list->count_elements == 0)       return 1;
     else                                return 0;
+}
+
+static node_t *get_node_at(list_t *list, list_size_t index)
+{
+    node_t *node_ref;
+    list_size_t i =0;
+
+    node_ref = list->head;
+
+    for (i = 0; i < index; i++)
+    {
+        node_ref = node_ref->next;
+    }
+
+    return node_ref;
 }
