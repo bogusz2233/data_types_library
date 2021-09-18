@@ -23,6 +23,10 @@ int main(int arg_count, char *arg_values[])
     list_add_new_element_uint8(list, 10);
     printf("\nElement dodany\n");
     print_list_info(list);
+
+    list_add_new_element_uint8(list, 20);
+    printf("\nElement dodany\n");
+    print_list_info(list);
 }
 
 static void print_list_info(list_t *list)

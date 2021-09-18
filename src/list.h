@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+typedef uint32_t list_size_t;
+
 typedef enum
 {
     eList_data_type_uint8
@@ -13,13 +15,13 @@ typedef struct Node
     void                *data_ptr;
     eList_data_type_t   data_type;
     uint32_t            index;
-    struct node         *next;
-    struct node         *previous; 
+    struct Node         *next;
+    struct Node         *previous; 
 }list_node_t;
 
 typedef struct List
 {
-    uint32_t    count_elements;
+    list_size_t count_elements;
     list_node_t *head;
     list_node_t *tail;
 }list_t;
