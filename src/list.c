@@ -56,7 +56,7 @@ list_status_t list_remove_elements(list_t *list, list_size_t index)
     node_t *next_element;
     node_t *previous_element;
 
-    if(list->count_elements == 0)       return list_status_LIST_EMPTY;
+    if(is_list_empty(list))             return list_status_LIST_EMPTY;
     if(index >= list->count_elements)   return list_status_INDEX_BEYOND;
 
     current_element     = get_node_at(list, index);
