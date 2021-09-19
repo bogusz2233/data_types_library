@@ -15,7 +15,7 @@ typedef enum
 typedef enum
 {
     list_status_SUCCESS,
-    list_status_NO_ELEMENTS,
+    list_status_LIST_EMPTY,
     list_status_INDEX_BEYOND
 }list_status_t;
 
