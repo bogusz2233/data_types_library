@@ -48,6 +48,14 @@ list_data_type_t list_get_element_type(list_t *list, list_size_t index)
     return node_ref->data_type;
 }
 
+list_status_t list_remove_elements(list_t *list, list_size_t index)
+{
+    if(list->count_elements == 0)       return list_status_NO_ELEMENTS;
+    if(index >= list->count_elements)   return list_status_INDEX_BEYOND;
+
+    return list_status_SUCCESS;
+}
+
 void list_add_new_element_uint8(list_t *list, uint8_t value)
 {
     node_t *node                    = malloc(sizeof(node_t));
