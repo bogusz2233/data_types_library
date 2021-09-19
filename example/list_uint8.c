@@ -41,6 +41,11 @@ int main(int arg_count, char *arg_values[])
     list_remove_elements(list,2);
     print_list_info(list);
     print_list_elements(list);
+
+    list_uint8_set_element(list, 1, 25);
+    print_list_info(list);
+    print_list_elements(list);
+
 }   
 
 static void print_list_info(list_t *list)

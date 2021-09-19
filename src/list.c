@@ -99,7 +99,8 @@ void list_uint8_add_new_element(list_t *list, uint8_t value)
     node->data_ptr                  = malloc(sizeof(uint8_t));
     node->data_type                 = list_data_type_uint8;
     node->next                      = node;
-    *((uint8_t *)node->data_ptr)    = value;
+
+    uint8_set_node_value(node, value);
 
     if (is_list_empty(list))
     {
