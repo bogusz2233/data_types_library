@@ -92,7 +92,7 @@ list_status_t list_remove_elements(list_t *list, list_size_t index)
     return list_status_SUCCESS;
 }
 
-void list_add_new_element_uint8(list_t *list, uint8_t value)
+void list_uint8_add_new_element(list_t *list, uint8_t value)
 {
     node_t *node                    = malloc(sizeof(node_t));
     node->data_ptr                  = malloc(sizeof(uint8_t));
@@ -116,7 +116,7 @@ void list_add_new_element_uint8(list_t *list, uint8_t value)
     list->count_elements++;
 }
 
-uint8_t list_get_element_uint8(list_t *list, list_size_t index)
+uint8_t list_uint8_get_element(list_t *list, list_size_t index)
 {
     node_t * node_ref;
 

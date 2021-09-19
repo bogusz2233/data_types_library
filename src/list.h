@@ -26,8 +26,8 @@ list_status_t       list_remove_elements(list_t *list, list_size_t index);
 void                list_clear(list_t *list);
 void                list_destroy(list_t *list);
 
-void    list_add_new_element_uint8(list_t *list, uint8_t value);
-uint8_t list_get_element_uint8(list_t *list, list_size_t index);
+void    list_uint8_add_new_element(list_t *list, uint8_t value);
+uint8_t list_uint8_get_element(list_t *list, list_size_t index);
 
 
 #endif /* __LIST_H__ */
