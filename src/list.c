@@ -93,6 +93,14 @@ list_status_t list_remove_elements(list_t *list, list_size_t index)
     return list_status_SUCCESS;
 }
 
+void list_clear(list_t *list)
+{
+    while (!is_list_empty(list))
+    {
+        list_remove_elements(list, 0);
+    }
+}
+
 void list_uint8_add_new_element(list_t *list, uint8_t value)
 {
     node_t *node                    = malloc(sizeof(node_t));
