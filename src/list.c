@@ -19,6 +19,8 @@ typedef struct List
 
 static uint8_t  is_list_empty(list_t *);
 static node_t   *get_node_at(list_t *, list_size_t);
+static uint8_t  is_element_first(list_t *, node_t *);
+static uint8_t  is_element_last(list_t *, node_t *);
 
 list_t *list_create(void)
 {
@@ -48,7 +50,49 @@ list_data_type_t list_get_element_type(list_t *list, list_size_t index)
     return node_ref->data_type;
 }
 
-void list_add_new_element_uint8(list_t *list, uint8_t value)
+list_status_t list_remove_elements(list_t *list, list_size_t index)
+{
+    node_t *current_element;
+    node_t *next_element;
+    node_t *previous_element;
+
+    if(is_list_empty(list))             return list_status_LIST_EMPTY;
+    if(index >= list->count_elements)   return list_status_INDEX_BEYOND;
+
+    current_element     = get_node_at(list, index);
+    next_element        = current_element->next;
+    previous_element    = current_element->previous;
+
+    if( list->count_elements == 1 )
+    {
+        list->head = list->tail = NULL;
+    }
+    else if( is_element_first(list, current_element) )
+    {
+        // when element is first, point to itself as previous 
+        next_element->previous  = next_element;
+        list->head              = next_element;
+    }
+    else if( is_element_last(list, current_element) )
+    {
+        // when element is last, point to itself as next
+        previous_element->next  = previous_element;
+        list->tail              = previous_element;
+    }
+    else
+    {
+        next_element->previous = previous_element;
+        previous_element->next = next_element;
+    }
+
+    free(current_element->data_ptr);
+    free(current_element);
+    list->count_elements--;
+
+    return list_status_SUCCESS;
+}
+
+void list_uint8_add_new_element(list_t *list, uint8_t value)
 {
     node_t *node                    = malloc(sizeof(node_t));
     node->data_ptr                  = malloc(sizeof(uint8_t));
@@ -72,7 +116,7 @@ void list_add_new_element_uint8(list_t *list, uint8_t value)
     list->count_elements++;
 }
 
-uint8_t list_get_element_uint8(list_t *list, list_size_t index)
+uint8_t list_uint8_get_element(list_t *list, list_size_t index)
 {
     node_t * node_ref;
 
@@ -106,4 +150,14 @@ static node_t *get_node_at(list_t *list, list_size_t index)
     }
 
     return node_ref;
+}
+
+static uint8_t is_element_first(list_t *list, node_t *element)
+{
+    return list->head == element;
+}
+
+static uint8_t is_element_last(list_t *list, node_t *element)
+{
+    return list->tail == element;
 }

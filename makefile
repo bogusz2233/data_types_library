@@ -16,7 +16,6 @@ MAIN_OBJ		= $(patsubst $(SRC_DIR)/%,$(BUILD_DIR)/%,$(subst ../,,$(patsubst %.c,%
 
 all: $(MAIN_OBJ)
 	@$(CC) -shared -o datatypes.so $(MAIN_OBJ)
-#	@$(AR) $(ARFLAGS) libdatatypes.a $(MAIN_OBJ)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(info Compiling: $@)
@@ -26,5 +25,5 @@ init:
 	mkdir build
 
 example_list: all
-	$(CC) $(CFLAGS) $(LDFLAGS) $(MAIN_INC) ./datatypes.so $(EXAMPLE_DIR)/list_uint8.c -o $(EXAMPLE_DIR)/list_example
+	@$(CC) $(CFLAGS) $(LDFLAGS) $(MAIN_INC) ./datatypes.so $(EXAMPLE_DIR)/list_uint8.c -o $(EXAMPLE_DIR)/list_example
 	@./$(EXAMPLE_DIR)/list_example
