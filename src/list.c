@@ -5,7 +5,6 @@ typedef struct Node
 {
     void                *data_ptr;
     list_data_type_t    data_type;
-    uint32_t            index;
     struct Node         *next;
     struct Node         *previous; 
 }node_t;
