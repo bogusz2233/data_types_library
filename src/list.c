@@ -50,21 +50,32 @@ list_data_type_t list_get_element_type(list_t *list, list_size_t index)
 
 list_status_t list_remove_elements(list_t *list, list_size_t index)
 {
-    node_t *element;
+    node_t *current_element;
+    node_t *next_element;
+    node_t *previous_element;
 
     if(list->count_elements == 0)       return list_status_LIST_EMPTY;
     if(index >= list->count_elements)   return list_status_INDEX_BEYOND;
 
-    element = get_node_at(list, index);
+    current_element     = get_node_at(list, index);
+    next_element        = current_element->next;
+    previous_element    = current_element->previous;
 
     if(list->count_elements == 1)
     {
         list->head = list->tail = NULL;
     }
+    else if(index == 0)
+    {
+        // when element is first, point to itself as previous 
+        next_element->previous  = next_element;
+        list->head              = next_element;
+    }
 
-    free(element->data_ptr);
-    free(element);
+    free(current_element->data_ptr);
+    free(current_element);
     list->count_elements--;
+    
     return list_status_SUCCESS;
 }
 
