@@ -19,6 +19,8 @@ typedef struct List
 
 static uint8_t  is_list_empty(list_t *);
 static node_t   *get_node_at(list_t *, list_size_t);
+static uint8_t  is_element_first(list_t *, node_t *);
+static uint8_t  is_element_last(list_t *, node_t *);
 
 list_t *list_create(void)
 {
@@ -61,17 +63,17 @@ list_status_t list_remove_elements(list_t *list, list_size_t index)
     next_element        = current_element->next;
     previous_element    = current_element->previous;
 
-    if(list->count_elements == 1)
+    if( list->count_elements == 1 )
     {
         list->head = list->tail = NULL;
     }
-    else if(current_element == list->head)
+    else if( is_element_first(list, current_element) )
     {
         // when element is first, point to itself as previous 
         next_element->previous  = next_element;
         list->head              = next_element;
     }
-    else if(current_element == list->tail)
+    else if( is_element_last(list, current_element) )
     {
         // when element is last, point to itself as next
         previous_element->next  = previous_element;
@@ -148,4 +150,14 @@ static node_t *get_node_at(list_t *list, list_size_t index)
     }
 
     return node_ref;
+}
+
+static uint8_t is_element_first(list_t *list, node_t *element)
+{
+    return list->head == element;
+}
+
+static uint8_t is_element_last(list_t *list, node_t *element)
+{
+    return list->tail == element;
 }
