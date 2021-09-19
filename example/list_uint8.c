@@ -17,35 +17,38 @@ int main(int arg_count, char *arg_values[])
     printf("List created\n");
     print_list_info(list);
 
-    list_uint8_add_new_element(list, 5);
-    list_uint8_add_new_element(list, 10);
-    list_uint8_add_new_element(list, 20);
-    list_uint8_add_new_element(list, 48);
-    list_uint8_add_new_element(list, 51);
-    list_uint8_add_new_element(list, 120);
+    list_element_uint8_add_new(list, 5);
+    list_element_uint8_add_new(list, 10);
+    list_element_uint8_add_new(list, 20);
+    list_element_uint8_add_new(list, 48);
+    list_element_uint8_add_new(list, 51);
+    list_element_uint8_add_new(list, 120);
 
 
     print_list_info(list);
     print_list_elements(list);
 
-    list_remove_elements(list,2);
-    list_remove_elements(list,4);
+    list_element_remove(list,2);
+    list_element_remove(list,4);
 
     print_list_info(list);
     print_list_elements(list);
 
-    list_remove_elements(list,0);
+    list_element_remove(list,0);
     print_list_info(list);
     print_list_elements(list);
 
-    list_remove_elements(list,2);
+    list_element_remove(list,2);
     print_list_info(list);
     print_list_elements(list);
 
-    list_uint8_set_element(list, 1, 25);
+    list_element_uint8_set(list, 1, 25);
     print_list_info(list);
     print_list_elements(list);
 
+    list_clear(list);
+    print_list_info(list);
+    print_list_elements(list);
 }   
 
 static void print_list_info(list_t *list)
@@ -64,9 +67,9 @@ static void print_list_elements(list_t *list)
 
     for (list_size_t i = 0; i < count_elements; i++)
     {
-        if(list_get_element_type(list, i) == list_data_type_uint8)
+        if(list_element_get_type(list, i) == list_data_type_uint8)
         {
-            result = list_uint8_get_element(list, i);
+            result = list_element_uint8_get(list, i);
             printf("[ %2d ] = %3d\n", i, result);
         }
     }
