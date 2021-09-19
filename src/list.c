@@ -77,6 +77,11 @@ list_status_t list_remove_elements(list_t *list, list_size_t index)
         previous_element->next  = previous_element;
         list->tail              = previous_element;
     }
+    else
+    {
+        next_element->previous = previous_element;
+        previous_element->next = next_element;
+    }
 
     free(current_element->data_ptr);
     free(current_element);
