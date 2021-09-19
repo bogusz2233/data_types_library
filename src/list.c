@@ -101,6 +101,12 @@ void list_clear(list_t *list)
     }
 }
 
+void list_destroy(list_t *list)
+{
+    list_clear(list);
+    free(list);
+}
+
 void list_element_uint8_add_new(list_t *list, uint8_t value)
 {
     node_t *node                    = malloc(sizeof(node_t));
