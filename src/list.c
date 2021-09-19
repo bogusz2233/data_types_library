@@ -65,7 +65,7 @@ list_status_t list_remove_elements(list_t *list, list_size_t index)
     {
         list->head = list->tail = NULL;
     }
-    else if(index == 0)
+    else if(current_element == list->head)
     {
         // when element is first, point to itself as previous 
         next_element->previous  = next_element;
@@ -75,7 +75,7 @@ list_status_t list_remove_elements(list_t *list, list_size_t index)
     free(current_element->data_ptr);
     free(current_element);
     list->count_elements--;
-    
+
     return list_status_SUCCESS;
 }
 
