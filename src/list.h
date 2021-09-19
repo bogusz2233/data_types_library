@@ -16,7 +16,8 @@ typedef enum
 {
     list_status_SUCCESS,
     list_status_LIST_EMPTY,
-    list_status_INDEX_BEYOND
+    list_status_INDEX_BEYOND,
+    list_status_LIST_NULL_PTR
 }list_status_t;
 
 list_t              *list_create(void);
@@ -26,7 +27,8 @@ list_status_t       list_remove_elements(list_t *list, list_size_t index);
 void                list_clear(list_t *list);
 void                list_destroy(list_t *list);
 
-void    list_uint8_add_new_element(list_t *list, uint8_t value);
-uint8_t list_uint8_get_element(list_t *list, list_size_t index);
+void                list_uint8_add_new_element(list_t *list, uint8_t value);
+uint8_t             list_uint8_get_element(list_t *list, list_size_t index);
+list_status_t       list_uint8_set_element(list_t *list, list_size_t index, uint8_t value);
 
 #endif /* __LIST_H__ */

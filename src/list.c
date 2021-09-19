@@ -21,6 +21,7 @@ static uint8_t  is_list_empty(list_t *);
 static node_t   *get_node_at(list_t *, list_size_t);
 static uint8_t  is_element_first(list_t *, node_t *);
 static uint8_t  is_element_last(list_t *, node_t *);
+static void     uint8_set_node_value(node_t *, uint8_t);
 
 list_t *list_create(void)
 {
@@ -130,6 +131,18 @@ uint8_t list_uint8_get_element(list_t *list, list_size_t index)
     return 0;
 }
 
+list_status_t list_uint8_set_element(list_t *list, list_size_t index, uint8_t value)
+{
+    node_t *node_ref;
+
+    if(list == NULL )                   return list_status_LIST_NULL_PTR;
+    if(index >= list->count_elements)   return list_status_INDEX_BEYOND;
+
+    node_ref = get_node_at(list, index);
+    uint8_set_node_value(node_ref, value);
+
+    return list_status_SUCCESS;
+}
 
 static uint8_t is_list_empty(list_t *list)
 {
@@ -152,12 +165,17 @@ static node_t *get_node_at(list_t *list, list_size_t index)
     return node_ref;
 }
 
-static uint8_t is_element_first(list_t *list, node_t *element)
+inline static uint8_t is_element_first(list_t *list, node_t *element)
 {
     return list->head == element;
 }
 
-static uint8_t is_element_last(list_t *list, node_t *element)
+inline static uint8_t is_element_last(list_t *list, node_t *element)
 {
     return list->tail == element;
+}
+
+inline static void uint8_set_node_value(node_t *node, uint8_t value)
+{
+    *((uint8_t *)node->data_ptr) = value;
 }
