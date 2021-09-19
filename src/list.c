@@ -71,6 +71,12 @@ list_status_t list_remove_elements(list_t *list, list_size_t index)
         next_element->previous  = next_element;
         list->head              = next_element;
     }
+    else if(current_element == list->tail)
+    {
+        // when element is last, point to itself as next
+        previous_element->next  = previous_element;
+        list->tail              = previous_element;
+    }
 
     free(current_element->data_ptr);
     free(current_element);
