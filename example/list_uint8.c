@@ -46,6 +46,9 @@ int main(int arg_count, char *arg_values[])
     print_list_info(list);
     print_list_elements(list);
 
+    list_clear(list);
+    print_list_info(list);
+    print_list_elements(list);
 }   
 
 static void print_list_info(list_t *list)
