@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.21)
 set(PROJECT_NAME ListTest)
 
 set(Sources
-    listTest.cpp
+    linked_list_test.cpp
 )
 
 add_executable(${PROJECT_NAME} ${Sources})
