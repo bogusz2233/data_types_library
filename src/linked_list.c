@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "list.h"
+#include "linked_list.h"
 
 typedef struct Node
 {
@@ -11,20 +11,20 @@ typedef struct Node
 
 typedef struct List
 {
-    list_size_t count_elements;
+    linked_list_size_t count_elements;
     node_t      *head;
     node_t      *tail;
 };
 
-static uint8_t  is_list_empty(list_t *);
-static node_t   *get_node_at(list_t *, list_size_t);
-static uint8_t  is_element_first(list_t *, node_t *);
-static uint8_t  is_element_last(list_t *, node_t *);
+static uint8_t  is_list_empty(linked_list_t *);
+static node_t   *get_node_at(linked_list_t *, linked_list_size_t);
+static uint8_t  is_element_first(linked_list_t *, node_t *);
+static uint8_t  is_element_last(linked_list_t *, node_t *);
 static void     uint8_set_node_value(node_t *, uint8_t);
 
-list_t *list_create(void)
+linked_list_t *linked_list_create(void)
 {
-    list_t *list            = malloc(sizeof(list_t));
+    linked_list_t *list     = malloc(sizeof(linked_list_t));
     list->count_elements    = 0;
     list->head              = NULL;
     list->tail              = NULL;
@@ -32,13 +32,13 @@ list_t *list_create(void)
     return list;
 }
 
-list_size_t list_count_elements(list_t *list)
+linked_list_size_t linked_list_count_elements(linked_list_t *list)
 {
     if(list == NULL)    return -1;
     else                return list->count_elements;
 }
 
-list_data_type_t list_element_get_type(list_t *list, list_size_t index)
+list_data_type_t linked_list_element_get_type(linked_list_t *list, linked_list_size_t index)
 {
     node_t *node_ref;
 
@@ -50,7 +50,7 @@ list_data_type_t list_element_get_type(list_t *list, list_size_t index)
     return node_ref->data_type;
 }
 
-list_status_t list_element_remove(list_t *list, list_size_t index)
+list_status_t linked_list_element_remove(linked_list_t *list, linked_list_size_t index)
 {
     node_t *current_element;
     node_t *next_element;
@@ -92,21 +92,21 @@ list_status_t list_element_remove(list_t *list, list_size_t index)
     return list_status_SUCCESS;
 }
 
-void list_clear(list_t *list)
+void linked_list_clear(linked_list_t *list)
 {
     while (!is_list_empty(list))
     {
-        list_element_remove(list, 0);
+        linked_list_element_remove(list, 0);
     }
 }
 
-void list_destroy(list_t *list)
+void linked_list_destroy(linked_list_t *list)
 {
-    list_clear(list);
+    linked_list_clear(list);
     free(list);
 }
 
-void list_element_uint8_add_new(list_t *list, uint8_t value)
+void linked_list_element_uint8_add_new(linked_list_t *list, uint8_t value)
 {
     node_t *node                    = malloc(sizeof(node_t));
     node->data_ptr                  = malloc(sizeof(uint8_t));
@@ -131,7 +131,7 @@ void list_element_uint8_add_new(list_t *list, uint8_t value)
     list->count_elements++;
 }
 
-uint8_t list_element_uint8_get(list_t *list, list_size_t index)
+uint8_t linked_list_element_uint8_get(linked_list_t *list, linked_list_size_t index)
 {
     node_t * node_ref;
 
@@ -145,7 +145,7 @@ uint8_t list_element_uint8_get(list_t *list, list_size_t index)
     return 0;
 }
 
-list_status_t list_element_uint8_set(list_t *list, list_size_t index, uint8_t value)
+list_status_t linked_list_element_uint8_set(linked_list_t *list, linked_list_size_t index, uint8_t value)
 {
     node_t *node_ref;
 
@@ -158,16 +158,16 @@ list_status_t list_element_uint8_set(list_t *list, list_size_t index, uint8_t va
     return list_status_SUCCESS;
 }
 
-static uint8_t is_list_empty(list_t *list)
+static uint8_t is_list_empty(linked_list_t *list)
 {
     if(list->count_elements == 0)       return 1;
     else                                return 0;
 }
 
-static node_t *get_node_at(list_t *list, list_size_t index)
+static node_t *get_node_at(linked_list_t *list, linked_list_size_t index)
 {
     node_t *node_ref;
-    list_size_t i =0;
+    linked_list_size_t i =0;
 
     node_ref = list->head;
 
@@ -179,12 +179,12 @@ static node_t *get_node_at(list_t *list, list_size_t index)
     return node_ref;
 }
 
-inline static uint8_t is_element_first(list_t *list, node_t *element)
+inline static uint8_t is_element_first(linked_list_t *list, node_t *element)
 {
     return list->head == element;
 }
 
-inline static uint8_t is_element_last(list_t *list, node_t *element)
+inline static uint8_t is_element_last(linked_list_t *list, node_t *element)
 {
     return list->tail == element;
 }
