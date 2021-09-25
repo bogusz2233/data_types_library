@@ -158,10 +158,9 @@ list_status_t linked_list_element_uint8_set(linked_list_t *list, linked_list_siz
     return list_status_SUCCESS;
 }
 
-static uint8_t is_list_empty(linked_list_t *list)
+inline static uint8_t is_list_empty(linked_list_t *list)
 {
-    if(list->count_elements == 0)       return 1;
-    else                                return 0;
+    return list->count_elements == 0; 
 }
 
 static node_t *get_node_at(linked_list_t *list, linked_list_size_t index)
